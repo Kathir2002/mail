@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 app.post('/send-email', async (req, res) => {
-    const { subject, content } = req.body;
+  const { from, to, subject, content } = req.body;
 
     const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -21,7 +21,7 @@ app.post('/send-email', async (req, res) => {
 
     try {
         await transporter.sendMail({
-            from: "testdemomailuser@gmail.com",
+            from: from,
             to: to,
             subject: subject,
             text: content
